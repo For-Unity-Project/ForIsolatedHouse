@@ -1,1 +1,1 @@
-you are fucking stupid fatass
+you are fat
