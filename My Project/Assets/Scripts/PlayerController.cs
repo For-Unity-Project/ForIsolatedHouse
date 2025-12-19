@@ -24,53 +24,58 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetBool("IsWalk", true);
                 animator.SetBool("IsRun", true);
-                hips.AddForce(hips.transform.forward * speed * 1.5f);
+                animator.SetBool("IsSidewayL", false);
+                animator.SetBool("IsSidewayR", false);
+                hips.AddForce(-hips.transform.forward * speed * 1.5f);
             }
             else
             {
                 animator.SetBool("IsWalk", true);
                 animator.SetBool("IsRun", false);
-                hips.AddForce(hips.transform.forward * speed);
+                animator.SetBool("IsSidewayL", false);
+                animator.SetBool("IsSidewayR", false);
+                hips.AddForce(-hips.transform.forward * speed);
             }
         }
         else
         {
             animator.SetBool("IsWalk", false);
             animator.SetBool("IsRun", false);
+            animator.SetBool("IsSidewayL", false);
+            animator.SetBool("IsSidewayR", false);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            animator.SetBool("IsWalk", true);
+            animator.SetBool("IsWalk", false);
             animator.SetBool("IsRun", false);
-            hips.AddForce(-hips.transform.right * strafeSpeed);
+            animator.SetBool("IsSidewayL", true);
+            animator.SetBool("IsSidewayR", false);
+            hips.AddForce(hips.transform.right * strafeSpeed);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             animator.SetBool("IsWalk", true);
             animator.SetBool("IsRun", false);
-            hips.AddForce(-hips.transform.forward * speed);
+            animator.SetBool("IsSidewayL", false);
+            animator.SetBool("IsSidewayR", false);
+            hips.AddForce(hips.transform.forward * speed);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            animator.SetBool("IsWalk", true);
+            animator.SetBool("IsWalk", false);
             animator.SetBool("IsRun", false);
-            hips.AddForce(hips.transform.right * strafeSpeed);
+            animator.SetBool("IsSidewayL", false);
+            animator.SetBool("IsSidewayR", true);
+            hips.AddForce(-hips.transform.right * strafeSpeed);
         }
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            animator.SetBool("IsJump", true);  // play jump animation once
             hips.AddForce(Vector3.up * jumpForce);
             isGrounded = false;
-        }
-
-        // When landing
-        if (isGrounded)
-        {
-            animator.SetBool("IsJump", false);
         }
 
     }
