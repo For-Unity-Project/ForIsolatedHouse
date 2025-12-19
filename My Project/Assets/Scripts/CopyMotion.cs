@@ -3,16 +3,24 @@ using UnityEngine;
 public class CopyMotion : MonoBehaviour
 {
     public Transform targetLimb;
-    ConfigurableJoint cj;
+    public ConfigurableJoint joint;
+
+    Quaternion initialRotation;
 
     void Start()
     {
-        cj = GetComponent<ConfigurableJoint>();
+        joint = GetComponent<ConfigurableJoint>();
+        initialRotation = transform.localRotation;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        cj.targetRotation = targetLimb.rotation;
+        joint.targetRotation = GetTargetRotation();
+    }
+
+    Quaternion GetTargetRotation()
+    {
+        // Convert target rotation into joint space
+        return Quaternion.Inverse(targetLimb.localRotation) * initialRotation;
     }
 }
