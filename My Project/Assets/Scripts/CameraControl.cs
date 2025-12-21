@@ -1,38 +1,68 @@
-using UnityEngine;
+﻿using UnityEngine;
+using Unity.Netcode;
 
-public class CameraControl : MonoBehaviour
+public class CameraControl : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float rotationSpeed = 1;
-    public Transform root;
-
-    float mouseX, mouseY;
-
+    [Header("Settings")]
+    public float rotationSpeed = 3f;
     public float stomachOffset;
 
-    public ConfigurableJoint hipjoint, stomachJoint;
+    [Header("References")]
+    public Transform root;
+    public ConfigurableJoint hipJoint;
+    public ConfigurableJoint stomachJoint;
+    public Camera cam;
+    public AudioListener audioListener;
+
+    private float mouseX, mouseY;
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            // 🔴 Disable camera & audio for non-owner
+            cam.enabled = false;
+            audioListener.enabled = false;
+            enabled = false;
+            return;
+        }
+    }
+
     void Start()
     {
+        if (!IsOwner) return;
+
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        CamControl();
+        if (!IsOwner) return;
+
+        HandleCamera();
+        HandleCursorToggle();
     }
 
-    void CamControl()
+    void HandleCursorToggle()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            bool locked = Cursor.lockState == CursorLockMode.Locked;
+            Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = locked;
+        }
+    }
+
+    void HandleCamera()
     {
         mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
         mouseY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        mouseY = Mathf.Clamp(mouseY, -35, 60);
+        mouseY = Mathf.Clamp(mouseY, -35f, 60f);
 
-        Quaternion rootRotation = Quaternion.Euler(-mouseY, mouseX, 0);
+        root.rotation = Quaternion.Euler(-mouseY, mouseX, 0f);
 
-        root.rotation = rootRotation;
-
-        hipjoint.targetRotation = Quaternion.Euler(0, -mouseX, 0);
-        stomachJoint.targetRotation = Quaternion.Euler(mouseY + stomachOffset, 0, 0);
+        hipJoint.targetRotation = Quaternion.Euler(0f, -mouseX, 0f);
+        stomachJoint.targetRotation = Quaternion.Euler(mouseY + stomachOffset, 0f, 0f);
     }
 }
