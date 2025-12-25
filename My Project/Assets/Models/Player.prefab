@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 1116281104364558605}
   - component: {fileID: 1319071327097441384}
   - component: {fileID: 7875584899261577861}
+  - component: {fileID: 1234557821724613918}
   - component: {fileID: 2461644434146768134}
   m_Layer: 0
   m_Name: LowerLeg.l
@@ -711,6 +712,19 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &1234557821724613918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947255664426044216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a3b53c8c28cd5438d9d41772bbbc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LimbCollision
+  PlayerController: {fileID: 7304231476807636513}
 --- !u!114 &2461644434146768134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,6 +1407,7 @@ GameObject:
   - component: {fileID: 8612626990153870504}
   - component: {fileID: 7474259009172205789}
   - component: {fileID: 4610271506128443796}
+  - component: {fileID: 7912549196091717814}
   - component: {fileID: 5499726617858650958}
   m_Layer: 0
   m_Name: LowerLeg.r
@@ -1629,6 +1644,19 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &7912549196091717814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955495202914703134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a3b53c8c28cd5438d9d41772bbbc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LimbCollision
+  PlayerController: {fileID: 7304231476807636513}
 --- !u!114 &5499726617858650958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4883,10 +4911,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   ShowTopMostFoldoutHeaderGroup: 1
   animator: {fileID: 1832324423300182229}
-  hips: {fileID: 0}
+  hips: {fileID: 2393990096131730054}
   speed: 10
   strafeSpeed: 5
-  jumpForce: 5000
+  jumpForce: 250
   isGrounded: 0
 --- !u!114 &4210427650270348680
 MonoBehaviour:
