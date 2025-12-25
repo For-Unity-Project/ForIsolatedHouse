@@ -4914,7 +4914,7 @@ MonoBehaviour:
   hips: {fileID: 2393990096131730054}
   speed: 10
   strafeSpeed: 5
-  jumpForce: 250
+  jumpForce: 125
   isGrounded: 0
 --- !u!114 &4210427650270348680
 MonoBehaviour:
