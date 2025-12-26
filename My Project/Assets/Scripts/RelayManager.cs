@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Services.Core;
@@ -16,10 +14,39 @@ public class RelayManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI joinCodeText;
     [SerializeField] private TMP_InputField joinCodeInputField;
 
+    private GameObject ui;
+    private GameObject sjUi;
+
+    private void Awake()
+    {
+        ui = GameObject.Find("NetworkUi");
+        GameObject customUi = GameObject.Find("CustomUi");
+
+        if (ui == null)
+            Debug.LogError("NetworkUi not found in scene");
+
+        if (customUi != null)
+        {
+            Transform subjects = customUi.transform.Find("Subjects");
+            if (subjects != null)
+            {
+                sjUi = subjects.gameObject;
+                sjUi.SetActive(false); // hide at start
+            }
+            else
+            {
+                Debug.LogError("Subjects not found under CustomUi");
+            }
+        }
+        else
+        {
+            Debug.LogError("CustomUi not found");
+        }
+    }
+
     private async void Start()
     {
         await UnityServices.InitializeAsync();
-
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 
@@ -27,28 +54,32 @@ public class RelayManager : MonoBehaviour
     {
         string joinCode = await StartHostWithRelay();
         joinCodeText.text = joinCode;
+
+        if (ui != null)
+            ui.SetActive(false);
+
+        if (sjUi != null)
+            sjUi.SetActive(true);
     }
 
     public async void JoinRelay()
     {
         await StartClientWithRelay(joinCodeInputField.text);
+
+        if (ui != null)
+            ui.SetActive(false);
+
+        if (sjUi != null)
+            sjUi.SetActive(true);
     }
 
     private async Task<string> StartHostWithRelay(int maxConnections = 3)
     {
-        Allocation allocation;
+        Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
 
-        try
-        {
-            allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
-        }
-        catch
-        {
-            Debug.LogError("Creating allocation failed");
-            throw;
-        }
-
-        NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
+        NetworkManager.Singleton
+            .GetComponent<UnityTransport>()
+            .SetRelayServerData(new RelayServerData(allocation, "dtls"));
 
         string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
@@ -59,10 +90,10 @@ public class RelayManager : MonoBehaviour
     {
         JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-        NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
+        NetworkManager.Singleton
+            .GetComponent<UnityTransport>()
+            .SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
 
         return !string.IsNullOrEmpty(joinCode) && NetworkManager.Singleton.StartClient();
     }
 }
-
-
