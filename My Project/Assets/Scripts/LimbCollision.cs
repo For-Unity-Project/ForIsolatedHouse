@@ -2,16 +2,26 @@ using UnityEngine;
 
 public class LimbCollision : MonoBehaviour
 {
-    public PlayerController PlayerController;
+    public PlayerController playerController;
 
-
-    private void Start()
+    void Start()
     {
-        PlayerController = GameObject.FindFirstObjectByType<PlayerController>().GetComponent<PlayerController>();
+        playerController = FindFirstObjectByType<PlayerController>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        PlayerController.isGrounded = true;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            playerController.isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            playerController.isGrounded = false;
+        }
     }
 }
