@@ -2,7 +2,10 @@
 %TAG !u! tag:unity3d.com,2011:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &137882371903908314
@@ -2334,6 +2337,9 @@ Transform:
   - {fileID: 3247724623514230293}
   - {fileID: 642465455357949385}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -2792,7 +2798,10 @@ BoxCollider:
   m_Center: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &8597164206911579263
