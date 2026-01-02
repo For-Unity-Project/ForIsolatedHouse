@@ -630,7 +630,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 0
+    positionSpring: 5000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a3b53c8c28cd5438d9d41772bbbc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LimbCollision
-  PlayerController: {fileID: 7304231476807636513}
+  playerController: {fileID: 0}
 --- !u!114 &2461644434146768134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,7 +1562,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 0
+    positionSpring: 5000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -1656,7 +1656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a3b53c8c28cd5438d9d41772bbbc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LimbCollision
-  PlayerController: {fileID: 7304231476807636513}
+  playerController: {fileID: 0}
 --- !u!114 &5499726617858650958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4815,7 +4815,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 0
+    positionSpring: 50
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -4830,7 +4830,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1000
+    positionSpring: 5000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -5268,7 +5268,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 0
+    positionSpring: 5000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -5283,7 +5283,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1000
+    positionSpring: 5000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -6074,7 +6074,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 0
+    positionSpring: 5000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -6089,7 +6089,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1000
+    positionSpring: 5000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -6706,7 +6706,6 @@ GameObject:
   - component: {fileID: 4540843679944421305}
   - component: {fileID: 3716836833348981890}
   - component: {fileID: 8599613683491647528}
-  - component: {fileID: 6452709195728058539}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6842,19 +6841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c104096d02c6046a87dcc331da6992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationUI
-  ShowTopMostFoldoutHeaderGroup: 1
---- !u!114 &6452709195728058539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8161926254232985151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2699db41c4b43b04d921f39edde16334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MapSpawnRequester
   ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &8598813060968367361
 GameObject:

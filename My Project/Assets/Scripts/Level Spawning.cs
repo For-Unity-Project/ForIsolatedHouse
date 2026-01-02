@@ -1,23 +1,67 @@
 using UnityEngine;
+using System.Collections;
 
-public class LevelButton : MonoBehaviour
+public class LevelSpawning : MonoBehaviour
 {
     public int levelIndex;
-    public Transform levelSpawnPoint;
+    public Transform spawnPoint;
 
-    bool used;
+    private GameObject Ui;
+    private GameObject TextSpawn;
 
-    void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (used) return;
+        GameObject customUi = GameObject.Find("CustomUi");
+        TextSpawn = GameObject.Find("Promt1"); // ✅ fixed semicolon
 
-        LevelRequestSender sender =
-            other.GetComponentInParent<LevelRequestSender>();
-
-        if (sender != null)
+        if (customUi != null)
         {
-            used = true;
-            sender.RequestLevel(levelIndex, levelSpawnPoint.position, levelSpawnPoint.rotation);
+            Transform subjects = customUi.transform.Find("Subjects");
+            if (subjects != null)
+            {
+                Ui = subjects.gameObject;
+                Ui.SetActive(false); // hide at start
+            }
+            else
+            {
+                Debug.LogError("Subjects not found under CustomUi");
+            }
         }
+        else
+        {
+            Debug.LogError("CustomUi not found");
+        }
+    }
+
+    public void SpawnLevelButton()
+    {
+        if (LevelManager.Instance == null)
+        {
+            Debug.LogError("LevelManager not found");
+            return;
+        }
+
+        if (Ui != null)
+            Ui.SetActive(false);
+
+        if (TextSpawn != null)
+        {
+            TextSpawn.SetActive(true);
+            StartCoroutine(HideTextAfterDelay(5f)); // ✅ disable after 5 sec
+        }
+
+        LevelManager.Instance.SpawnLevel(
+            levelIndex,
+            spawnPoint.position,
+            spawnPoint.rotation
+        );
+    }
+
+    private IEnumerator HideTextAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (TextSpawn != null)
+            TextSpawn.SetActive(false);
     }
 }
