@@ -22,14 +22,11 @@ public class CustomizationUI : NetworkBehaviour
 
         customization = GetComponent<NetworkCustomization>();
 
-        Canvas canvas = FindObjectOfType<Canvas>(true);
-        customizationPanel =
-            canvas.transform.Find("CustomizationPanel").gameObject;
+        GameObject canvas = GameObject.Find("CustomUi");
+        customizationPanel = canvas.transform.Find("CustomizationPanel").gameObject;
 
-        colorButton =
-            customizationPanel.transform.Find("Colour").GetComponent<Button>();
-        hatButton =
-            customizationPanel.transform.Find("Hat").GetComponent<Button>();
+        colorButton = customizationPanel.transform.Find("Colour").GetComponent<Button>();
+        hatButton = customizationPanel.transform.Find("Hat").GetComponent<Button>();
 
         colorButton.onClick.AddListener(customization.NextBodyColor);
         hatButton.onClick.AddListener(customization.NextHat);
