@@ -21,14 +21,22 @@ public class DialogueTriggerNetworked : NetworkBehaviour
 
         used = true;
 
+        // 🔥 Start dialogue on everyone
         StartIntroClientRpc();
 
-        GetComponent<NetworkObject>().Despawn(true);
+        // 🔥 Remove trigger for everyone (NOT despawn)
+        DestroyTriggerClientRpc();
     }
 
     [ClientRpc]
     private void StartIntroClientRpc()
     {
         intro.StartSequence();
+    }
+
+    [ClientRpc]
+    private void DestroyTriggerClientRpc()
+    {
+        Destroy(gameObject);
     }
 }
